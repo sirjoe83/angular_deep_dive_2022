@@ -1,25 +1,37 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TabbedPaneService } from '../tabbed-pane/tabbed-pane.service';
 
 @Component({
   selector: 'app-tab-navigator',
   templateUrl: './tab-navigator.component.html',
-  styleUrls: ['./tab-navigator.component.scss'], // or .css
+  styleUrls: ['./tab-navigator.component.scss'],
 })
 export class TabNavigatorComponent implements OnInit {
-  @Input() page = 0;
-  @Input() pageCount = 0;
-  @Output() pageChange = new EventEmitter<number>();
+  // No imports anymore:
+  page = 0;
+  pageCount = 0;
 
-  constructor() {}
+  // Inject service here:
+  constructor(private service: TabbedPaneService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Hinzufügen: Von Service benachrichtigen lassen
+    this.service.pageCount.subscribe((pageCount) => {
+      this.pageCount = pageCount;
+    });
+    this.service.currentPage.subscribe((page) => {
+      this.page = page;
+    });
+  }
 
   prev(): void {
     if (this.page <= 1) {
       return;
     }
     this.page--;
-    this.pageChange.emit(this.page);
+
+    // Add: Notify service:
+    this.service.currentPage.next(this.page);
   }
 
   next(): void {
@@ -27,6 +39,8 @@ export class TabNavigatorComponent implements OnInit {
       return;
     }
     this.page++;
-    this.pageChange.emit(this.page);
+
+    // Add: Notify service:
+    this.service.currentPage.next(this.page);
   }
 }

@@ -9,11 +9,13 @@ import {
 } from '@angular/core';
 import { TabNavigatorComponent } from '../tab-navigator/tab-navigator.component';
 import { TabComponent } from '../tab/tab.component';
+import { TabbedPaneService } from './tabbed-pane.service';
 
 @Component({
   selector: 'app-tabbed-pane',
   templateUrl: './tabbed-pane.component.html',
   styleUrls: ['./tabbed-pane.component.scss'],
+  providers: [TabbedPaneService],
 })
 export class TabbedPaneComponent
   implements OnInit, AfterContentInit, AfterViewInit
@@ -33,17 +35,17 @@ export class TabbedPaneComponent
     return this.tabQueryList?.toArray() ?? [];
   }
 
-  constructor() {}
+  constructor(private service: TabbedPaneService) {}
 
   ngAfterViewInit(): void {
-    if (this.navigator) {
-      this.navigator.pageCount = this.tabs.length;
-      // This line would cause a cycle:
-      // this.navigator.page = 1;
-      this.navigator.pageChange.subscribe((page: number) => {
-        this.pageChange(page);
-      });
-    }
+    this.service.pageCount.next(this.tabs.length);
+    this.service.currentPage.subscribe((page: number) => {
+      // Prevent cycle:
+      if (page === this.currentPage) {
+        return;
+      }
+      this.pageChange(page);
+    });
   }
 
   ngAfterContentInit(): void {
@@ -59,9 +61,9 @@ export class TabbedPaneComponent
       tab.visible = tab === active;
     }
     this.activeTab = active;
-
-    // Add:
+    // Update:
     this.currentPage = this.tabs.indexOf(active) + 1;
+    this.service.currentPage.next(this.currentPage);
   }
 
   // Add:
