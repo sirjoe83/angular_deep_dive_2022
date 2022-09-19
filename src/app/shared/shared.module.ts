@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { CityValidationDirective } from './validation/city-validation.directive';
 import { TabbedPaneComponent } from './controls/tabbed-pane/tabbed-pane.component';
 import { TabComponent } from './controls/tab/tab.component';
+import { TabNavigatorComponent } from './controls/tab-navigator/tab-navigator.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { TabComponent } from './controls/tab/tab.component';
     // Von der CLI eingefügt
     CityValidationDirective,
       TabbedPaneComponent,
-      TabComponent
+      TabComponent,
+      TabNavigatorComponent
   ],
   exports: [
     DateComponent,
@@ -40,7 +42,8 @@ import { TabComponent } from './controls/tab/tab.component';
     // Neue Einträge
     CityValidationDirective,
       TabbedPaneComponent,
-      TabComponent
+      TabComponent,
+      TabNavigatorComponent
   ]
 })
 export class SharedModule { }
