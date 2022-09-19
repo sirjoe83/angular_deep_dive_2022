@@ -1,4 +1,10 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  OnInit,
+  QueryList,
+} from '@angular/core';
 import { TabComponent } from '../tab/tab.component';
 
 @Component({
@@ -7,10 +13,15 @@ import { TabComponent } from '../tab/tab.component';
   styleUrls: ['./tabbed-pane.component.scss'],
 })
 export class TabbedPaneComponent implements OnInit, AfterContentInit {
-  tabs: Array<TabComponent> = [];
-  activeTab: TabComponent | undefined;
+  @ContentChildren(TabComponent)
+  tabQueryList: QueryList<TabComponent> | undefined;
 
-  constructor() {}
+  activeTab: TabComponent | undefined;
+  currentPage = 0;
+
+  get tabs(): TabComponent[] {
+    return this.tabQueryList?.toArray() ?? [];
+  }
 
   ngAfterContentInit(): void {
     if (this.tabs.length > 0) {
