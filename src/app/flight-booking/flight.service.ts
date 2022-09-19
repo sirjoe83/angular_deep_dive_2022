@@ -2,7 +2,7 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Flight } from './flight';
 
 @Injectable({
@@ -12,17 +12,21 @@ export class FlightService {
   // We will refactor this to an observable in a later exercise!
   flights: Flight[] = [];
 
+  private flightsSubject = new BehaviorSubject<Flight[]>([]);
+  readonly flights$ = this.flightsSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
-  load(from: string, to: string): void {
-    this.find(from, to).subscribe({
-      next: (flights) => {
+  load(from: string, to: string, urgent?: boolean): void {
+    const o = this.find(from, to).subscribe(
+      (flights) => {
         this.flights = flights;
+
+        // Add this line:
+        this.flightsSubject.next(flights);
       },
-      error: (err) => {
-        console.error('error', err);
-      },
-    });
+      (err) => console.error('Error loading flights', err)
+    );
   }
 
   find(from: string, to: string): Observable<Flight[]> {
@@ -47,5 +51,7 @@ export class FlightService {
     const newFlight: Flight = { ...oldFlight, date: newDate.toISOString() };
     const newFlights = [newFlight, ...oldFlights.slice(1)];
     this.flights = newFlights;
+
+    this.flightsSubject.next(newFlights);
   }
 }

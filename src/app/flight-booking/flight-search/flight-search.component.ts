@@ -7,9 +7,10 @@ import { FlightService } from '../flight.service';
 @Component({
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
-  styleUrls: ['./flight-search.component.scss']
+  styleUrls: ['./flight-search.component.scss'],
 })
 export class FlightSearchComponent implements OnInit {
+  flights$ = this.flightService.flights$;
 
   from = 'Hamburg';
   to = 'Graz';
@@ -23,14 +24,12 @@ export class FlightSearchComponent implements OnInit {
 
   basket: { [key: number]: boolean } = {
     3: true,
-    5: true
+    5: true,
   };
 
-  constructor(private flightService: FlightService) {
-  }
+  constructor(private flightService: FlightService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   search(): void {
     this.flightService.load(this.from, this.to);
@@ -43,5 +42,4 @@ export class FlightSearchComponent implements OnInit {
   delay(): void {
     this.flightService.delay();
   }
-
 }
