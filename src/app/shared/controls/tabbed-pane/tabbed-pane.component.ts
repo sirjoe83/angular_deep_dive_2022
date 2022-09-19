@@ -15,7 +15,7 @@ import { TabbedPaneService } from './tabbed-pane.service';
   selector: 'app-tabbed-pane',
   templateUrl: './tabbed-pane.component.html',
   styleUrls: ['./tabbed-pane.component.scss'],
-  providers: [TabbedPaneService],
+  viewProviders: [TabbedPaneService],
 })
 export class TabbedPaneComponent
   implements OnInit, AfterContentInit, AfterViewInit
