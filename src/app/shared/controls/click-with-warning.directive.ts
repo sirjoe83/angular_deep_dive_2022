@@ -3,6 +3,7 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
+  HostListener,
   Input,
   OnInit,
   Output,
@@ -18,6 +19,13 @@ export class ClickWithWarningDirective implements OnInit {
   @HostBinding('class') classBinding: string | undefined;
 
   constructor(private elementRef: ElementRef) {}
+
+  @HostListener('click', ['$event.shiftKey'])
+  handleClick(shiftKey: boolean): void {
+    if (shiftKey || confirm(this.warning)) {
+      this.appClickWithWarning.emit();
+    }
+  }
 
   ngOnInit(): void {
     this.classBinding = 'btn btn-danger';
