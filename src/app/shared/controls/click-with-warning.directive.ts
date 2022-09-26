@@ -11,6 +11,7 @@ import {
 
 @Directive({
   selector: '[appClickWithWarning]',
+  exportAs: 'clickWithWarning',
 })
 export class ClickWithWarningDirective implements OnInit {
   @Input() warning = 'Are you sure?';
