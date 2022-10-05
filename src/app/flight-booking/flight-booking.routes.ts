@@ -13,7 +13,7 @@ import { FlightResolver } from './flight-edit/flight.resolver';
 
 export const FLIGHT_BOOKING_ROUTES: Routes = [
   {
-    path: 'flight-booking',
+    path: '',
     component: FlightBookingComponent,
     children: [
       {
@@ -23,7 +23,7 @@ export const FLIGHT_BOOKING_ROUTES: Routes = [
       {
         path: 'passenger-search',
         component: PassengerSearchComponent,
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
       },
       {
         path: 'flight-edit/:id',

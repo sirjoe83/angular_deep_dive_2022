@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FlightBookingModule } from './flight-booking/flight-booking.module';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -15,15 +14,13 @@ import { APP_ROUTES } from './app.routes';
 import { SharedModule } from './shared/shared.module';
 import { BasketComponent } from './basket/basket.component';
 import { CustomerModule } from './customer/customer.module';
-import { FlightService } from './flight-booking/flight.service';
-import { DefaultFlightService } from './flight-booking/default-flight.service';
 
 @NgModule({
   imports: [
     RouterModule.forRoot(APP_ROUTES),
     HttpClientModule,
     BrowserModule,
-    FlightBookingModule,
+    //FlightBookingModule,
     SharedModule,
     CustomerModule,
   ],
