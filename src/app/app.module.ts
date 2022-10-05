@@ -21,7 +21,7 @@ import { CustomerModule } from './customer/customer.module';
     HttpClientModule,
     BrowserModule,
     //FlightBookingModule,
-    SharedModule,
+    SharedModule.forRoot(),
     CustomerModule,
   ],
   declarations: [

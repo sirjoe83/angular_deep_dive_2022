@@ -16,7 +16,7 @@ import { FlightResolver } from './flight-edit/flight.resolver';
   imports: [
     RouterModule.forChild(FLIGHT_BOOKING_ROUTES),
     FormsModule,
-    SharedModule,
+    SharedModule.forChild(),
   ],
   declarations: [
     FlightSearchComponent,
