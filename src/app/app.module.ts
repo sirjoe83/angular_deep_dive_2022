@@ -14,10 +14,13 @@ import { APP_ROUTES } from './app.routes';
 import { SharedModule } from './shared/shared.module';
 import { BasketComponent } from './basket/basket.component';
 import { CustomerModule } from './customer/customer.module';
+import { CustomPreloadingStrategy } from './shared/preloading/custom-preloading-strategy';
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(APP_ROUTES),
+    RouterModule.forRoot(APP_ROUTES, {
+      preloadingStrategy: CustomPreloadingStrategy,
+    }),
     HttpClientModule,
     BrowserModule,
     //FlightBookingModule,

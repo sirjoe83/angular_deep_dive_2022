@@ -20,6 +20,7 @@ import { DataTableDirective } from './controls/data-table.directive';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
 import { CanDeactivateGuard } from './deactivation/can-deactivate.guard';
+import { CustomPreloadingStrategy } from './preloading/custom-preloading-strategy';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -70,7 +71,12 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
-      providers: [AuthService, AuthGuard, CanDeactivateGuard],
+      providers: [
+        AuthService,
+        AuthGuard,
+        CanDeactivateGuard,
+        CustomPreloadingStrategy,
+      ],
     };
   }
 }
