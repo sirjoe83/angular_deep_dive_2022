@@ -7,6 +7,7 @@ import { FlightService } from './flight.service';
 })
 export class DummyFlightService implements FlightService {
   constructor() {}
+
   flights: Flight[] = [];
   flightsSubject = new BehaviorSubject<Flight[]>([]);
   flights$ = this.flightsSubject.asObservable();
@@ -42,5 +43,9 @@ export class DummyFlightService implements FlightService {
         date: '2022-01-02T20:00+01:00',
       },
     ]);
+  }
+
+  findById(id: string): Observable<Flight> {
+    throw new Error('Method not implemented.');
   }
 }

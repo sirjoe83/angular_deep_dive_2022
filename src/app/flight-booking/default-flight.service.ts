@@ -55,4 +55,12 @@ export class DefaultFlightService implements FlightService {
 
     this.flightsSubject.next(newFlights);
   }
+
+  findById(id: string): Observable<Flight> {
+    let url = 'http://www.angular.at/api/flight';
+    let params = new HttpParams().set('id', id);
+    let headers = new HttpHeaders().set('Accept', 'application/json');
+
+    return this.http.get<Flight>(url, { params, headers });
+  }
 }

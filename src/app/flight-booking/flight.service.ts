@@ -20,6 +20,7 @@ export abstract class FlightService {
   abstract delay(): void;
   abstract find(from: string, to: string): Observable<Flight[]>;
   abstract load(from: string, to: string, urgent?: boolean): void;
+  abstract findById(id: string): Observable<Flight>;
 
   /*
   // We will refactor this to an observable in a later exercise!
