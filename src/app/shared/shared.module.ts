@@ -17,12 +17,11 @@ import { ClickWithWarningDirective } from './controls/click-with-warning.directi
 import { TooltipDirective } from './tooltip.directive';
 import { TableFieldDirective } from './controls/data-table/table-field.directive';
 import { DataTableDirective } from './controls/data-table.directive';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-  ],
+  imports: [CommonModule, FormsModule],
   declarations: [
     DateComponent,
     CityPipe,
@@ -31,14 +30,15 @@ import { DataTableDirective } from './controls/data-table.directive';
 
     // Von der CLI eingefügt
     CityValidationDirective,
-      TabbedPaneComponent,
-      TabComponent,
-      TabNavigatorComponent,
-      ClickWithWarningDirective,
-      TooltipDirective,
-      TableFieldDirective,
-      DataTableDirective
+    TabbedPaneComponent,
+    TabComponent,
+    TabNavigatorComponent,
+    ClickWithWarningDirective,
+    TooltipDirective,
+    TableFieldDirective,
+    DataTableDirective,
   ],
+  providers: [AuthService, AuthGuard],
   exports: [
     DateComponent,
     CityPipe,
@@ -49,13 +49,13 @@ import { DataTableDirective } from './controls/data-table.directive';
 
     // Neue Einträge
     CityValidationDirective,
-      TabbedPaneComponent,
-      TabComponent,
-      TabNavigatorComponent,
-      ClickWithWarningDirective,
-      TooltipDirective,
-      TableFieldDirective,
-      DataTableDirective
-  ]
+    TabbedPaneComponent,
+    TabComponent,
+    TabNavigatorComponent,
+    ClickWithWarningDirective,
+    TooltipDirective,
+    TableFieldDirective,
+    DataTableDirective,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
