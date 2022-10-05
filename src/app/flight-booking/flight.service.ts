@@ -3,12 +3,25 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { DefaultFlightService } from './default-flight.service';
+import { DummyFlightService } from './dummy-flight.service';
 import { Flight } from './flight';
+import { createFlightService } from './flight-service.factory';
 
 @Injectable({
   providedIn: 'root',
+  useFactory: createFlightService,
+  deps: [HttpClient],
 })
-export class FlightService {
+export abstract class FlightService {
+  abstract flightsSubject: BehaviorSubject<Flight[]>;
+  abstract flights: Flight[];
+  abstract flights$: Observable<Flight[]>;
+  abstract delay(): void;
+  abstract find(from: string, to: string): Observable<Flight[]>;
+  abstract load(from: string, to: string, urgent?: boolean): void;
+
+  /*
   // We will refactor this to an observable in a later exercise!
   flights: Flight[] = [];
 
@@ -54,4 +67,5 @@ export class FlightService {
 
     this.flightsSubject.next(newFlights);
   }
+  */
 }

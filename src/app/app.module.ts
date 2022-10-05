@@ -15,6 +15,8 @@ import { APP_ROUTES } from './app.routes';
 import { SharedModule } from './shared/shared.module';
 import { BasketComponent } from './basket/basket.component';
 import { CustomerModule } from './customer/customer.module';
+import { FlightService } from './flight-booking/flight.service';
+import { DefaultFlightService } from './flight-booking/default-flight.service';
 
 @NgModule({
   imports: [
