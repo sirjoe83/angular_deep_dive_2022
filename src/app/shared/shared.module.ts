@@ -19,6 +19,7 @@ import { TableFieldDirective } from './controls/data-table/table-field.directive
 import { DataTableDirective } from './controls/data-table.directive';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
+import { CanDeactivateGuard } from './deactivation/can-deactivate.guard';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
@@ -38,7 +39,7 @@ import { AuthGuard } from './auth/auth.guard';
     TableFieldDirective,
     DataTableDirective,
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, CanDeactivateGuard],
   exports: [
     DateComponent,
     CityPipe,

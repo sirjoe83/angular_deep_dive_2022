@@ -1,8 +1,10 @@
+<div *ngIf="showWarning">
+  <p>Seite verlassen?</p>
+  <button (click)="decide(true)">Ja</button>
+  <button (click)="decide(false)">Nein</button>
+</div>
+
 <h1>Flight Edit</h1>
 
-<p>
-    Id: {{id}}
-</p>
-<p>
-    ShowDetail: {{id}}
-</p>
+<p>Id: {{ id }}</p>
+<p>ShowDetail: {{ id }}</p>
